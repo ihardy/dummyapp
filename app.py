@@ -22,6 +22,24 @@ def log_request():
     except Exception as e:
         logging.warning("Could not parse request body: %s", e)
 
+@app.route('/service-points', methods=['GET'])
+def get_service_points():
+    log_request()
+    response = {
+        "servicepoints": [],
+        "totalRecords": 0
+    }
+    return make_response(jsonify(response), 200)
+
+@app.route('/service-points-users', methods=['GET'])
+def get_service_points_users():
+    log_request()
+    response = {
+        "servicePointsUsers": [],
+        "totalRecords": 0
+    }
+    return make_response(jsonify(response), 200)
+
 @app.route('/', methods=METHODS)
 def root_is_ok():
     log_request()
@@ -60,3 +78,4 @@ def set_response_code(request_method):
 # run this app
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
+
